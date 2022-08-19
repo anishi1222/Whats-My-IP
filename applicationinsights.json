@@ -1,0 +1,13 @@
+{
+  "connectionString" : "InstrumentationKey=64b7d0fc-4b49-4084-85b2-531998b60826;IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/;LiveEndpoint=https://westus.livediagnostics.monitor.azure.com/",
+  "preview" : {
+    "gcEvents" : {
+      "reportingLevel" : "ALL"
+    },
+    "profiler" : {
+      "cpuTriggeredSettings" : "diagnostic_profile",
+      "enabled" : true,
+      "memoryTriggeredSettings" : "diagnostic_profile"
+    }
+  }
+}
