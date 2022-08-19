@@ -1,5 +1,5 @@
-ARG BUILD_IMAGE=maven:3.8.6-eclipse-temurin-11-focal
-ARG RUNTIME_IMAGE=mcr.microsoft.com/openjdk/jdk:11-ubuntu
+ARG BUILD_IMAGE=maven:3.8.6-eclipse-temurin-17-focal
+ARG RUNTIME_IMAGE=mcr.microsoft.com/openjdk/jdk:17-ubuntu
 
 #ARG PROXY_SET=false
 #ARG PROXY_HOST=
@@ -37,8 +37,8 @@ FROM ${RUNTIME_IMAGE}
 RUN mkdir /opt/app
 COPY --from=build /target/envchecker-0.1.jar /opt/app/envchecker.jar
 # COPY --from=build /target/libs /opt/app/libs
-COPY applicationinsights.json /opt/app/applicationinsights.json
-COPY applicationinsights-agent-illuminate-3.3.1.jar /opt/app/applicationinsights-agent-illuminate-3.3.1.jar
+COPY applicationinsights.json /opt/app/.
+COPY applicationinsights-agent-illuminate-3.3.1.jar /opt/app/.
 
-ENTRYPOINT ["java","-javaagent:/opt/app/applicationinsights-agent-illuminate-3.3.1.jar","-jar", "/opt/app/envchecker.jar"]
+ENTRYPOINT ["java","-XX:+UseParallelGC","-javaagent:/opt/app/applicationinsights-agent-illuminate-3.3.1.jar","-jar", "/opt/app/envchecker.jar"]
 EXPOSE 8080
