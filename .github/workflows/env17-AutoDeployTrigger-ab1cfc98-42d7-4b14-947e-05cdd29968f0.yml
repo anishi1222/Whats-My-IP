@@ -35,7 +35,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: anishi/envchecker:${{ github.sha }}
+          tags: anishi/env17:${{ github.sha }}
           file: ./Dockerfile
           context: ./
 
@@ -57,4 +57,4 @@ jobs:
           inlineScript: |
             az config set extension.use_dynamic_install=yes_without_prompt
             az containerapp registry set -n env17 -g ACA --server docker.io --username  ${{ secrets.ENV17_REGISTRY_USERNAME }} --password ${{ secrets.ENV17_REGISTRY_PASSWORD }}
-            az containerapp update -n env17 -g ACA --image anishi/envchecker:${{ github.sha }}
+            az containerapp update -n env17 -g ACA --image anishi/env17:${{ github.sha }}
