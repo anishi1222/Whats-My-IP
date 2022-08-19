@@ -10,8 +10,7 @@ import java.util.Optional;
 public class Environment {
 
     @Get(produces = MediaType.APPLICATION_JSON)
-    Optional<Map<String, String>> environment() {
-        // Return Environment variables defined in the environment simplily
+    Optional<Map<String, String>> getEnvVal() {
         return Optional.of(System.getenv());
     }
 }
