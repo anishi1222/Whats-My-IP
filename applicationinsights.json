@@ -10,8 +10,5 @@
       "enableDiagnostics" : true,
       "memoryTriggeredSettings" : "diagnostic-profile"
     }
-  },
-  "role" : {
-    "name" : "env17-ACA"
- }
+  }
 }
