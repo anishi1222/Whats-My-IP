@@ -5,9 +5,10 @@
       "reportingLevel" : "ALL"
     },
     "profiler" : {
-      "cpuTriggeredSettings" : "diagnostic_profile",
+      "cpuTriggeredSettings" : "diagnostic-profile",
       "enabled" : true,
-      "memoryTriggeredSettings" : "diagnostic_profile"
+      "enableDiagnostics" : true,
+      "memoryTriggeredSettings" : "diagnostic-profile"
     }
   }
 }
