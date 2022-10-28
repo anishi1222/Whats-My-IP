@@ -2,23 +2,24 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.logicojp.example.micronaut</groupId>
-    <artifactId>envchecker</artifactId>
+    <groupId>io.logicojp.examples.micronaut</groupId>
+    <artifactId>illuminate4micronaut</artifactId>
     <version>0.1</version>
     <packaging>${packaging}</packaging>
+
     <parent>
         <groupId>io.micronaut</groupId>
         <artifactId>micronaut-parent</artifactId>
-        <version>3.6.0</version>
+        <version>3.7.2</version>
     </parent>
 
     <properties>
         <packaging>jar</packaging>
         <jdk.version>17</jdk.version>
         <release.version>17</release.version>
-        <micronaut.version>3.6.0</micronaut.version>
+        <micronaut.version>3.7.2</micronaut.version>
         <micronaut.runtime>jetty</micronaut.runtime>
-        <exec.mainClass>io.logicojp.example.micronaut.Application</exec.mainClass>
+        <exec.mainClass>io.logicojp.examples.micronaut.Application</exec.mainClass>
     </properties>
 
     <repositories>
@@ -65,13 +66,13 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>io.micronaut.jaxrs</groupId>
-            <artifactId>micronaut-jaxrs-server</artifactId>
+            <groupId>io.micronaut.servlet</groupId>
+            <artifactId>micronaut-http-server-jetty</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>io.micronaut.servlet</groupId>
-            <artifactId>micronaut-http-server-jetty</artifactId>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-exporter-logging</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -106,19 +107,13 @@
                             <artifactId>micronaut-http-validation</artifactId>
                             <version>${micronaut.version}</version>
                         </path>
-                        <path>
-                            <groupId>io.micronaut.jaxrs</groupId>
-                            <artifactId>micronaut-jaxrs-processor</artifactId>
-                            <version>${micronaut.jaxrs.version}</version>
-                        </path>
                     </annotationProcessorPaths>
                     <compilerArgs>
-                        <arg>-Amicronaut.processing.group=io.logicojp.example.micronaut</arg>
-                        <arg>-Amicronaut.processing.module=envchecker</arg>
+                        <arg>-Amicronaut.processing.group=io.logicojp.examples.micronaut</arg>
+                        <arg>-Amicronaut.processing.module=illuminate4micronaut</arg>
                     </compilerArgs>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>
