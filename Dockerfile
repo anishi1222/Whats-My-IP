@@ -35,10 +35,9 @@ RUN mvn -B clean package -Dmaven.test.skip
 FROM ${RUNTIME_IMAGE}
 
 RUN mkdir /opt/app
-COPY --from=build /target/envchecker-0.1.jar /opt/app/envchecker.jar
+COPY --from=build /target/illuminate4micronaut-0.1.jar /opt/app/illuminate4micronaut.jar
 # COPY --from=build /target/libs /opt/app/libs
-COPY applicationinsights.json /opt/app/.
-COPY applicationinsights-agent-illuminate-3.3.1.jar /opt/app/.
-
-ENTRYPOINT ["java","-XX:+UseParallelGC","-javaagent:/opt/app/applicationinsights-agent-illuminate-3.3.1.jar","-jar", "/opt/app/envchecker.jar"]
+COPY applicationinsights.json /opt/app/applicationinsights.json
+COPY applicationinsights-agent-illuminate-3.4.1.jar /opt/app/applicationinsights-agent-illuminate-3.4.1.jar
 EXPOSE 8080
+ENTRYPOINT ["java","-XX:+UseG1GC","-javaagent:/opt/app/applicationinsights-agent-illuminate-3.4.1.jar","-jar", "/opt/app/illuminate4micronaut.jar"]
