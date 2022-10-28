@@ -1,3 +1,6 @@
 micronaut:
   application:
-    name: envchecker
+    name: illuminate4micronaut
+otel:
+  traces:
+    exporter: logging
