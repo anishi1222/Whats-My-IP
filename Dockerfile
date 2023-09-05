@@ -1,5 +1,5 @@
-ARG BUILD_IMAGE=maven:3.8.6-eclipse-temurin-17-focal
-ARG RUNTIME_IMAGE=mcr.microsoft.com/openjdk/jdk:17-ubuntu
+ARG BUILD_IMAGE=maven:3.9.4-eclipse-temurin-17-focal
+ARG RUNTIME_IMAGE=mcr.microsoft.com/openjdk/jdk:17-mariner
 
 #ARG PROXY_SET=false
 #ARG PROXY_HOST=
@@ -34,10 +34,8 @@ RUN mvn -B clean package -Dmaven.test.skip
 # ---------------------------------------------------
 FROM ${RUNTIME_IMAGE}
 
-RUN mkdir /opt/app
-COPY --from=build /target/illuminate4micronaut-0.1.jar /opt/app/illuminate4micronaut.jar
+WORKDIR /opt/app
+COPY --from=build /target/envchecker-0.1.jar envchecker.jar
 # COPY --from=build /target/libs /opt/app/libs
-COPY applicationinsights.json /opt/app/applicationinsights.json
-COPY applicationinsights-agent-illuminate-3.4.1.jar /opt/app/applicationinsights-agent-illuminate-3.4.1.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-XX:+UseG1GC","-javaagent:/opt/app/applicationinsights-agent-illuminate-3.4.1.jar","-jar", "/opt/app/illuminate4micronaut.jar"]
+ENTRYPOINT ["java","-XX:+UseG1GC","-jar", "envchecker.jar"]

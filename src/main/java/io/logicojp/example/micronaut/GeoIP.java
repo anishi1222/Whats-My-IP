@@ -1,4 +1,4 @@
-package io.logicojp.examples.micronaut;
+package io.logicojp.example.micronaut;
 
 public class GeoIP {
     String ip;

@@ -13,3 +13,5 @@ out/
 .settings
 .classpath
 .factorypath
+applicationinsights-agent-3.4.13.jar
+illuminate-diagnostics-2.0.159.jar

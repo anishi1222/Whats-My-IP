@@ -2,24 +2,26 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.logicojp.examples.micronaut</groupId>
-    <artifactId>illuminate4micronaut</artifactId>
+    <groupId>io.logicojp.example.micronaut</groupId>
+    <artifactId>envchecker</artifactId>
     <version>0.1</version>
     <packaging>${packaging}</packaging>
 
     <parent>
-        <groupId>io.micronaut</groupId>
+        <groupId>io.micronaut.platform</groupId>
         <artifactId>micronaut-parent</artifactId>
-        <version>3.7.2</version>
+        <version>4.1.0</version>
     </parent>
 
     <properties>
         <packaging>jar</packaging>
         <jdk.version>17</jdk.version>
         <release.version>17</release.version>
-        <micronaut.version>3.7.2</micronaut.version>
-        <micronaut.runtime>jetty</micronaut.runtime>
-        <exec.mainClass>io.logicojp.examples.micronaut.Application</exec.mainClass>
+        <micronaut.version>4.1.0</micronaut.version>
+        <micronaut.aot.enabled>false</micronaut.aot.enabled>
+        <micronaut.aot.packageName>com.example.aot.generated</micronaut.aot.packageName>
+        <micronaut.runtime>netty</micronaut.runtime>
+        <exec.mainClass>io.logicojp.example.micronaut.Application</exec.mainClass>
     </properties>
 
     <repositories>
@@ -37,7 +39,7 @@
         </dependency>
         <dependency>
             <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-validation</artifactId>
+            <artifactId>micronaut-http-validation</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -66,8 +68,13 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>io.micronaut.servlet</groupId>
-            <artifactId>micronaut-http-server-jetty</artifactId>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-http-server-netty</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.micronaut.serde</groupId>
+            <artifactId>micronaut-serde-jackson</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -90,13 +97,15 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>io.micronaut.build</groupId>
+                <groupId>io.micronaut.maven</groupId>
                 <artifactId>micronaut-maven-plugin</artifactId>
+                <version>4.0.6</version>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
                 <configuration>
                     <!-- Uncomment to enable incremental compilation -->
                     <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
@@ -110,7 +119,7 @@
                     </annotationProcessorPaths>
                     <compilerArgs>
                         <arg>-Amicronaut.processing.group=io.logicojp.examples.micronaut</arg>
-                        <arg>-Amicronaut.processing.module=illuminate4micronaut</arg>
+                        <arg>-Amicronaut.processing.module=envchecker</arg>
                     </compilerArgs>
                 </configuration>
             </plugin>

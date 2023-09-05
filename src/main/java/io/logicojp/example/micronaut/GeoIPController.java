@@ -1,4 +1,4 @@
-package io.logicojp.examples.micronaut;
+package io.logicojp.example.micronaut;
 
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;

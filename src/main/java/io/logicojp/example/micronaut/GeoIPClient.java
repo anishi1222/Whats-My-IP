@@ -1,4 +1,4 @@
-package io.logicojp.examples.micronaut;
+package io.logicojp.example.micronaut;
 import org.reactivestreams.Publisher;
 
 import io.micronaut.core.async.annotation.SingleResult;
