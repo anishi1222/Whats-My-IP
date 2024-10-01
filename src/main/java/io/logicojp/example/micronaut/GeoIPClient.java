@@ -6,7 +6,7 @@ import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.client.annotation.Client;
 
-@Client("https://ip.seeip.org/geoip")
+@Client("https://api.my-ip.io/v2/ip.json")
 public interface GeoIPClient  {
     @Get(consumes = MediaType.APPLICATION_JSON)
     @SingleResult

@@ -1,5 +1,5 @@
-ARG BUILD_IMAGE=maven:3.9.4-eclipse-temurin-17-focal
-ARG RUNTIME_IMAGE=mcr.microsoft.com/openjdk/jdk:17-mariner
+ARG BUILD_IMAGE=maven:3.9.9-eclipse-temurin-21
+ARG RUNTIME_IMAGE=mcr.microsoft.com/openjdk/jdk:21-distroless
 
 #ARG PROXY_SET=false
 #ARG PROXY_HOST=
@@ -8,34 +8,19 @@ ARG RUNTIME_IMAGE=mcr.microsoft.com/openjdk/jdk:17-mariner
 # ---------------------------------------------------
 # Resolve all maven dependencies
 # ---------------------------------------------------
-FROM ${BUILD_IMAGE} as dependencies
+FROM ${BUILD_IMAGE} AS build
 
 COPY pom.xml ./
-
-RUN mvn -B dependency:go-offline
-#        -DproxySet=${PROXY_SET} \
-#        -DproxyHost=${PROXY_HOST} \
-#        -DproxyPort=${PROXY_PORT} \
-
-# ---------------------------------------------------
-# Build an artifact
-# ---------------------------------------------------
-FROM dependencies as build
-
 COPY src ./src
 
-RUN mvn -B clean package -Dmaven.test.skip
-#        -DproxySet=${PROXY_SET} \
-#        -DproxyHost=${PROXY_HOST} \
-#        -DproxyPort=${PROXY_PORT} \
+RUN mvn -B clean dependency:copy-dependencies -DoutputDirectory=./target/lib package -Dmaven.test.skip
 
 # ---------------------------------------------------
 # Build container
 # ---------------------------------------------------
 FROM ${RUNTIME_IMAGE}
-
+USER app
 WORKDIR /opt/app
-COPY --from=build /target/envchecker-0.1.jar envchecker.jar
-# COPY --from=build /target/libs /opt/app/libs
+COPY --from=build /target/envchecker-0.1.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-XX:+UseG1GC","-jar", "envchecker.jar"]
+CMD ["-XX:+UseParallelGC","-jar", "app.jar"]
